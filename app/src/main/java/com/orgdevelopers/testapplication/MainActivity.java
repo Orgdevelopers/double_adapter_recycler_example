@@ -6,6 +6,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
 import android.os.Handler;
+import android.widget.Toast;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -25,14 +26,21 @@ public class MainActivity extends AppCompatActivity {
         list = findViewById(R.id.List);
 
         //data jsonArray
-        JSONArray data = new JSONArray();
+        JSONArray data = null;
+        try {
+            data = new JSONArray("[{\"srno\":1,\"userid\":\"CMGHG01\",\"accountcode\":\"CODE ABC\",\"symbol\":\"SILVER\",\"expirydate\":\"11 JAN 2022\"},{\"srno\":2,\"userid\":\"USER1\",\"accountcode\":\"CODE XYZ\",\"symbol\":\"DINR\",\"expirydate\":\"24 MAR 2022\"},{\"srno\":3,\"userid\":\"USER2\",\"accountcode\":\"CODE XYZ\",\"symbol\":\"CL\",\"expirydate\":\"3 JUL 2022\"},{\"srno\":4,\"userid\":\"USER2\",\"accountcode\":\"CODE ABC\",\"symbol\":\"SILVER\",\"expirydate\":\"19 JUL 2022\"}]");
+            formatData(data);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
 
-        formatData(data);
 
     }
 
     private void formatData(JSONArray data) {
         summeryModels = new ArrayList<>();
+        Toast.makeText(this, ""+data.length(), Toast.LENGTH_SHORT).show();
+
         try {
             for (int i=0; i<data.length(); i++) {
                 String userId = data.getJSONObject(i).getString("userid");
@@ -47,7 +55,7 @@ public class MainActivity extends AppCompatActivity {
                     trade.sr = singleRow.getString("srno");
                     trade.userId = singleRow.getString("userid");
                     trade.accountCode = singleRow.getString("accountcode");
-                    trade.expiry = singleRow.getString("expiry");
+                    trade.expiry = singleRow.getString("expirydate");
                     trade.symbol = singleRow.getString("symbol");
 
                     //get existing model from list
@@ -72,12 +80,14 @@ public class MainActivity extends AppCompatActivity {
                     trade.sr = singleRow.getString("srno");
                     trade.userId = singleRow.getString("userid");
                     trade.accountCode = singleRow.getString("accountcode");
-                    trade.expiry = singleRow.getString("expiry");
+                    trade.expiry = singleRow.getString("expirydate");
                     trade.symbol = singleRow.getString("symbol");
 
                     full_summery.userId = singleRow.getString("userid");
                     full_summery.tradeList = new ArrayList<>();
                     full_summery.tradeList.add(trade);
+
+                    summeryModels.add(full_summery);
 
                 }
 
@@ -109,7 +119,6 @@ public class MainActivity extends AppCompatActivity {
 
     private void initRecyclers() {
         //after purifying data let's show it
-
         LinearLayoutManager manager = new LinearLayoutManager(this);
         manager.setOrientation(RecyclerView.VERTICAL);
 

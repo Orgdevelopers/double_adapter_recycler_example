@@ -1,16 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="wrap_content"
+    android:background="@color/white"
+    android:layout_marginTop="20dp"
+    >
 
     <LinearLayout
         android:id="@+id/headerLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/white"
         android:orientation="vertical">
 
         <TextView
+            android:textStyle="bold"
             android:id="@+id/idTxt"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -33,6 +36,7 @@
                 android:textSize="13dp"
                 android:text="Account code"
                 android:layout_weight="5"
+                android:textStyle="bold"
                 android:singleLine="true"
                 android:gravity="center"
                 />
@@ -43,6 +47,7 @@
                 android:textColor="@color/black"
                 android:textSize="13dp"
                 android:text="Symbol"
+                android:textStyle="bold"
                 android:gravity="center"
                 android:singleLine="true"
                 android:layout_weight="5"/>
@@ -53,6 +58,7 @@
                 android:textColor="@color/black"
                 android:textSize="13dp"
                 android:text="Date"
+                android:textStyle="bold"
                 android:gravity="center"
                 android:singleLine="true"
                 android:layout_weight="4"/>
@@ -65,8 +71,8 @@
         android:id="@+id/userTradeList"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="10dp"
-        android:layout_below="@+id/headerLayout" />
+        android:layout_below="@+id/headerLayout"
+        android:layout_marginBottom="10dp"/>
 
 
 </RelativeLayout>
